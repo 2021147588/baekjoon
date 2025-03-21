@@ -13,16 +13,15 @@ def solution(V, E, G):
     heap = [[0, 1]] # 거리, node이름 
     heapq.heapify(heap)
     cost = 0
-    for i in range(1, V+1): 
-        while len(heap)!=0 and visited[heap[0][1]]==1:
-            heapq.heappop(heap)
-        # print(heap[0])
-        cost += heap[0][0]
-        node = heap[0][1]
-        visited[node]=1
-        for n in graph[node]:
+    cnt = 0
+    while cnt < V:
+        k, v = heapq.heappop(heap)
+        if visited[v]: continue
+        visited[v] = 1
+        cost += k
+        cnt +=1
+        for n in graph[v]:
             heapq.heappush(heap, [n[1], n[0]])
-                
         
     # print(cost)
     return cost
